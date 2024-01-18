@@ -11,10 +11,16 @@ def flash(request):
     if request.method == "GET":
         categoria = Categoria.objects.all()
         dificuldade = Flashcard.DIFICULDADE_CHOICES
-        flashs = Flashcard.objects.filter(user_id=request.user.id)
-        print(flashs)  
-        print(request.user)      
-        return render(request, 'flashcards.html', {'categoria': categoria, 'dificuldade': dificuldade})
+        
+        categoriaFiltro = request.GET.get('categoriaFiltro')
+        dificuldadeFiltro = request.GET.get('dificuldadeFiltro')
+        
+        if (categoriaFiltro == None or dificuldadeFiltro == None):
+            flashs = Flashcard.objects.filter(user_id=request.user.id)
+        else:
+            flashs = Flashcard.objects.filter(user_id=request.user.id, categoria_id=categoriaFiltro, dificuldade=dificuldadeFiltro)
+           
+        return render(request, 'flashcards.html', {'categoria': categoria, 'dificuldade': dificuldade, 'flashs': flashs})
     if request.method == "POST":
         pergunta = request.POST.get("pergunta")
         resposta = request.POST.get("resposta")
