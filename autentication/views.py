@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.messages import constants
 from django.contrib import messages, auth
 
+
 def cadastro(request):
         try:
             if request.method == "GET":
