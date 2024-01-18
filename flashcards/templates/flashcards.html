@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'cabecalho' %}
+ <link href="{% static 'flashcards/css/flashcards.css' %}" rel="stylesheet">
+ <link href="{% static 'autentication/css/autentication.css' %}" rel="stylesheet">
+ <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+{% endblock 'cabecalho' %}
+{% block 'conteudo' %}
+ <div class="container">
+ <br>
+ <br>
+ <div class="row">
+ 
+ <div class="col-md">
+
+ <div class="box-form">
+ <form action="{% url 'flashcards' %}" method="POST"> {% csrf_token %}
+ <h3>Novo flashcard</h3>
+ {% if messages %}
+ <br>
+ {% for message in messages %}
+ <section class="alert {{message.tags}}">
+ {{message}}
+ </section>
+ {% endfor %}
+ {% endif %}
+ <br>
+<label>Pergunta</label>
+ <input type="text" required class="form-control" placeholder="Insira a pergunta" name="pergunta">
+ <br>
+<label>Resposta</label>
+ <textarea class="form-control" required placeholder="Insira a resposta" name="resposta"></textarea>
+ <br>
+<div class="row">
+
+ <div class="col-md">
+ <label for="">Categoria</label>
+ <select required class="form-select" name="categoria">
+    <option value=''>Selecione uma categoria</option>
+    {% for m in categoria %}
+        <option value={{m.id}}>{{m}}</option>
+    {% endfor %}
+ </select>
+ </div>
+<div class="col-md">
+ <label for="">Dificuldade</label>
+ <select required class="form-select" name="dificuldade">
+    <option value=''>Selecione uma categoria</option>
+    {% for d in dificuldade%}
+        <option value={{d.0}}>{{d.1}}</option>
+    {% endfor %}
+ </select>
+ </div>
+
+ </div>
+<br>
+<input type="submit" value="Enviar" class="btn-cadastro">
+ <br>
+<br>
+<br>
+ </form>
+ </div>
+ </div>
+ <div class="col-md">
+ <form action="" method="GET">
+ <div class="row">
+ <div class="col-md">
+ <label for="">Categoria</label>
+ <select name="categoria" id="" class="form-select">
+    <option value=''>Selecione uma categoria</option>
+    {% for m in categoria %}
+        <option value={{m.id}}>{{m}}</option>
+    {% endfor %}
+ </select>
+ </div>
+<div class="col-md">
+ <label for="">Dificuldade</label>
+ <select name="dificuldade" id="" class="form-select">
+    <option value=''>Selecione uma categoria</option>
+    {% for d in dificuldade%}
+        <option value={{d.0}}>{{d.1}}</option>
+    {% endfor %}
+ </select>
+ </div>
+<div class="col-md">
+ <br>
+<input type="submit" style="width: 100%" value="Filtrar" class="btn-cadastro">
+ </div>
+ </div>
+ </form>
+ <br>
+ <br>
+
+ <div class="box-new-flashcard">
+ <div class="flashcard ">
+ <div class="flashcard-categoria">
+ Matematica
+ </div>
+ <a href=""><i class='icone-exit bx bx-x-circle'></i></a>
+ <br>
+<br>
+<div class="flashcard-box-item">
+ <p class="flashcard-item">1 + 1 = 2</p>
+ </div>
+ </div>
+<div class="resposta-flashcard">
+ Sim
+ </div>
+ </div>
+ <br>
+ <br>
+ </div>
+ </div>
+ </div>
+ 
+
+{% endblock 'conteudo' %}

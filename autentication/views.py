@@ -47,8 +47,8 @@ def logar(request):
         else:
             auth.login(request, user)
             messages.add_message(request, constants.SUCCESS, 'usuário logado!!')
-            return redirect("/autentication/logar")
+            return redirect('/flashcards')
 
 def logout(request):
     auth.logout(request)
-    return redirect('autentication/logar')   
+    return redirect('logar/')   
