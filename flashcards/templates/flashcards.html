@@ -7,10 +7,12 @@
 {% endblock 'cabecalho' %}
 {% block 'conteudo' %}
  <div class="container">
+    <form action="{% url 'logout' %}" method="GET">
+        <input type="submit" class='btn-cadastro' value='Log Out'/>
+    </form>
  <br>
  <br>
  <div class="row">
- 
  <div class="col-md">
 
  <div class="box-form">
