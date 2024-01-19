@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 {% block 'cabecalho' %}
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
  <link href="{% static 'flashcards/css/flashcards.css' %}" rel="stylesheet">
  <link href="{% static 'autentication/css/autentication.css' %}" rel="stylesheet">
- <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+ <script src="{% static 'flashcards/js/flashs.js' %}"></script>
 {% endblock 'cabecalho' %}
 {% block 'conteudo' %}
  <div class="container">
@@ -94,20 +95,20 @@
  <br>
 
  {% for f in flashs%}
-    <div class="box-new-flashcard">
+    <div class="box-new-flashcard" onclick="flip_card({{f.id}})"> 
         <div class="flashcard ">
             <div class="flashcard-categoria">
                 {{f.categoria}}
             </div>
-            <a href=""><i class='icone-exit bx bx-x-circle'></i></a>
+                <a href="/flashcards/deletarFlashCards/{{f.id}}"><i class='icone-exit bx bx-x-circle'></i></a>
             <br>
             <br>
             <div class="flashcard-box-item">
                 <p class="flashcard-item">{{f.pergunta}}</p>
             </div>
         </div>
-        <div class="resposta-flashcard">
-            {{f.resposta}}
+        <div class="resposta-flashcard" id="{{f.id}}">
+            <b>Resposta: </b>{{f.resposta}}
         </div>
     </div>
     <br>
@@ -116,6 +117,5 @@
     </div>
     </div>
     </div>
-
 
 {% endblock 'conteudo' %}

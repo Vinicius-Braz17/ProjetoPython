@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Categoria, Flashcard
 from django.contrib.messages import constants
 from django.contrib import messages
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -46,3 +47,15 @@ def flash(request):
         )
         messages.add_message(request, constants.SUCCESS, 'FlashCard cadastrado com sucesso')
         return redirect('/flashcards')
+    if request.method == 'DELETE':
+        return None
+    
+def deletar_flashCards(request, id):
+    try:
+        flash = Flashcard.objects.get(id=id, user_id=request.user.id)
+    
+        if flash:
+            flash.delete()
+        return redirect('flashcards') 
+    except:
+        return HttpResponse('Ops, algo deu errado :(')
