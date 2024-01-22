@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Categoria, Flashcard
+from .models import Categoria, Flashcard, BancoTeste
 from django.contrib.messages import constants
 from django.contrib import messages
 from django.http import HttpResponse
@@ -59,3 +59,28 @@ def deletar_flashCards(request, id):
         return redirect('flashcards') 
     except:
         return HttpResponse('Ops, algo deu errado :(')
+    
+def iniciar_desafio(request):
+    if request.method == "GET":
+        categoria = Categoria.objects.all()
+        dificuldades = Flashcard.DIFICULDADE_CHOICES
+        
+        lugarNascimento = BancoTeste.ESCOLHAS
+        
+        return render(request, 'iniciar_desafio.html', {'categorias': categoria, 'dificuldades': dificuldades, "lugar_nascimento": lugarNascimento})
+    elif request.method == 'POST':
+        usuario = request.POST.get('nome')
+        idade = request.POST.get('idade')
+        dataNascimento = request.POST.get('data_nascimento')
+        localNascimento = request.POST.get('lugar_nascimento')
+        
+        BancoTeste.objects.create(
+            user = usuario,
+            idade = idade,
+            data_nascimento = dataNascimento,
+            lugar_nascimento = localNascimento
+        )        
+        
+        
+        
+        return redirect('iniciar_desafio')

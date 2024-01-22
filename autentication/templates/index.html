@@ -46,15 +46,15 @@
 <h3>Cadastre-se</h3>
  <form action="{% url 'login' %}" method="POST"> {% csrf_token %}
  <label>Username</label>
- <input type="text" class="input-form" name="username" id="">
+ <input type="text" class="input-form" name="username">
  <br>
 <br>
 <label>Senha</label>
- <input type="password" class="input-form" name="senha" id="">
+ <input type="password" class="input-form" name="senha">
  <br>
 <br>
 <label>Confirmar senha</label>
- <input type="password" class="input-form" name="confirmar_senha" id="">
+ <input type="password" class="input-form" name="confirmar_senha">
  <br>
 <br>
 <input type="submit" value="Enviar" class="btn-cadastro">
